@@ -67,7 +67,17 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   resize() {
-    // Your code here
+    const data =  this.data;
+    this.capacity *= 2;
+    this.data = new Array(this.capacity).fill(null)
+    this.count = 0 
+    for (let i = 0; i < data.length; i++) {
+      let curr = data[i]
+      while(curr) {
+        this.insert(curr.key, curr.value)
+        curr =  curr.next
+      }
+    }
   }
 
 
