@@ -56,7 +56,7 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
   read(key) {
     const index = this.hashMod(key);
     let curr = this.data[index];
-    while(curr) {
+    while (curr) {
       if (curr.key === key) {
         return curr.value;
       }
@@ -67,22 +67,30 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   resize() {
-    const data =  this.data;
+    const data = this.data;
     this.capacity *= 2;
     this.data = new Array(this.capacity).fill(null)
-    this.count = 0 
+    this.count = 0
     for (let i = 0; i < data.length; i++) {
       let curr = data[i]
-      while(curr) {
+      while (curr) {
         this.insert(curr.key, curr.value)
-        curr =  curr.next
+        curr = curr.next
       }
     }
   }
 
 
   delete(key) {
-    // Your code here
+    const index = this.hashMod(key);
+    let curr = this.data[index];
+    while (curr) {
+      if (curr.key === key) {
+        this.curr = null
+      }
+      curr = curr.next;
+    }
+    return "Key not found";
   }
 }
 
