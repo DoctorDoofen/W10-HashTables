@@ -84,10 +84,17 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
   delete(key) {
     const index = this.hashMod(key);
     let curr = this.data[index];
+    let prev
     while (curr) {
       if (curr.key === key) {
-        this.curr = null
+        if(!prev) {
+          this.data[index] = curr.next
+        } else {
+          prev.next = curr.next
+        }
+        this.count--
       }
+      prev = curr
       curr = curr.next;
     }
     return "Key not found";
